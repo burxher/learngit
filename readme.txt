@@ -5,3 +5,4 @@ Zihuan Liang
 12
 34
 Git has a mutable index called stage.
+Git tracks changes.
