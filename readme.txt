@@ -1,9 +1,6 @@
-Git is a distributed version control system.
-Git is free software distributed under the GPL.
-Burcher
-Zihuan Liang
-12
-34
-Git has a mutable index called stage.
-Git tracks changes of files.
-mixiu
+开发一个日常生活软件
+用于记录日常生活，包括：
+聊天，实时聊天
+记账，多人记账、云端同步
+记事本、计划书
+照片，云端同步
