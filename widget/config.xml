@@ -1,4 +1,4 @@
-<widget id="A6939651007399" version="0.0.1">
+<widget id="A6917249584707" version="0.0.1">
     <name>伯彻的日常</name>
     <description>
         学习api cloud搭建APP，为写一个聊天-云端记账-云端记事本APP-云端图库做准备
@@ -30,7 +30,7 @@
     </feature>
 
     <preference name="pageBounce" value="false" />
-    <preference name="appBackground" value="rgba(0,0,0,0.0)" />
+    <preference name="appBackground" value="#f6f6f6" />
     <preference name="windowBackground" value="rgba(0,0,0,0.0)"/>
     <preference name="frameBackgroundColor" value="rgba(0,0,0,0.0)"/>
     <preference name="hScrollBarEnabled" value="true" />
