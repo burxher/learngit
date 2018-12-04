@@ -7,34 +7,64 @@
     <link rel="stylesheet" type="text/css" href="./css/aui.css" />
     <style type="text/css">
         .header {
-            padding: 2.5rem 0.5rem 2rem 0.5rem;
+            padding: 1.5rem 0.5rem 1rem 0.5rem;
         }
     </style>
 </head>
 <body>
     <header class="aui-bar aui-bar-nav aui-text-left header" id="header">
         <h1>
-            <a class="aui-btn aui-pull-right" tapmode onclick="openClub()">
+            <!-- <a class="aui-btn aui-pull-right" tapmode onclick="openClub()"> -->
+            <a class="aui-btn aui-pull-right" onclick="openFrame()">
                 <i class="aui-iconfont aui-icon-question"></i>
             </a>
-            AUI 2.1
+            伯彻的日常 1.0
         </h1>
+        <div class="aui-pull-right" tapmode onclick="alertPlan()">
+            <label class="aui-margin-r-5">花呗还款</label>
+            <span>剩余<strong class="aui-text-warning aui-margin-5">9</strong>天</span>
+        </div>
     </header>
 </body>
 <script type="text/javascript" src="./script/api.js"></script>
 <script type="text/javascript">
+    var isMine = true; //是否打开自己开发的页面
     apiready = function(){
-        api.setStatusBarStyle({
-            style: 'light'
+
+        // api.setStatusBarStyle({ //设置状态栏样式为白色
+        //     style: 'light'
+        // });
+        api.parseTapmode(); //点击事件优化，暂时不知道有什么用
+        openFrame();
+        //打开chrome调试
+        var chromeDebug = api.require('chromeDebug');
+        chromeDebug.openDebug(function (ret, err) {
+            if (1000 == ret.code) {
+                console.log("打开chrome调试")
+            } else {
+                console.log("打开chrome调试失败")
+            }
         });
-        api.parseTapmode();
+    };
+
+    // 打开首页frame
+    function openFrame() {
         var header = $api.byId('header');
-        var headerPos = $api.offset(header);
-        var body_h = $api.offset($api.dom('body')).h;
-        var header_h = $api.offset($api.byId('header')).h;
+        var header_h = $api.offset(header).h;
+        // 打开我的首页
+        api.closeFrame({ name: 'index_frm' }); //关闭
+        var _name = 'mine_index_frm';
+        var _url = './html/mine/index_frm.html';
+
+        if(!isMine) { //打开aui例子
+            api.closeFrame({ name: 'mine_index_frm' }); //关闭
+            _name = "index_frm";
+            _url = "./html/index_frm.html";
+        }
+        isMine = !isMine;
         api.openFrame({
-            name: 'index_frm',
-            url: './html/index_frm.html',
+            name: _name,
+            url: _url,
             bounces: true,
             rect: {
                 x: 0,
@@ -42,8 +72,10 @@
                 w: 'auto',
                 h: 'auto'
             }
-        })
-    };
+        });
+    }
+
+    // 打开说明书网址
     function openClub(){
         var delay = 0;
         if(api.systemType != 'ios'){
@@ -61,8 +93,12 @@
             }
         });
     }
-    function closeWin(){
-        api.closeWin({
+
+    // 打开计划详情提示框
+    function alertPlan() {
+        api.sendEvent({
+            name: 'dialog_plan',
+            extra: {key:' value'}
         });
     }
 </script>
