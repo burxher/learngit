@@ -10,36 +10,58 @@
 </head>
 
 <body>
-    <div class="aui-content">
-        happy 1.0
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <ul v-for="v in list">
+            <li class="aui-inline">{{ v.name }}</li>
+            <li class="aui-inline">{{ v.phone }}</li>
+        </ul>
     </div>
 </body>
 <script type="text/javascript" src="../../script/api.js"></script>
 <script type="text/javascript" src="../../script/aui-dialog.js"></script>
+<script type="text/javascript" src="../../script/lib/vue.min.js"></script>
 <script type="text/javascript">
     apiready = function () {
         api.parseTapmode();
         // 计划详情弹窗
         api.addEventListener({
             name: 'dialog_plan'
-        }, function(ret, err){
+        }, function (ret, err) {
             var dialog = new auiDialog();
-            api.alert({msg:"2018-12-13(周四)，剩余天数为 9 天"});
-            // dialog.alert({
-            //     title: "查看详情",
-            //     msg: '2018-12-13(周四)，剩余天数为 9 天',
-            //     buttons: ['取消', '确定']
-            // }, function (ret) {
-            //     console.log(JSON.stringify(ret));
-            //     if (ret) {
-            //         dialog.alert({
-            //             title: "提示",
-            //             msg: "你点击了第" + ret.buttonIndex + "个按钮",
-            //             buttons: ['确定']
-            //         });
-            //     }
-            // })
+            // api.alert({msg:"2018-12-13(周四)，剩余天数为 9 天"});
+            dialog.alert({
+                title: "查看详情",
+                msg: '2018-12-13(周四)，剩余天数为 9 天',
+                buttons: ['取消', '确定']
+            }, function (ret) {
+                console.log(JSON.stringify(ret));
+                if (ret) {
+                    dialog.alert({
+                        title: "提示",
+                        msg: "你点击了第" + ret.buttonIndex + "个按钮",
+                        buttons: ['确定']
+                    });
+                }
+            })
         });
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    {
+                        name: "burcher",
+                        phone:"18813293911"
+                    },
+                    {
+                        name: "haode",
+                        phone:"17602004429"
+                    }
+                ],
+                message: 'Hello Burcher!'
+            }
+        })
     }
     function openWin(name) {
         var delay = 0;

@@ -6,7 +6,7 @@
     <author email="burcherl@163.com" href="http://www.apicloud.com">
         伯彻
     </author>
-    <content src="index.html" />
+    <content src="ClockShow.html" />
     <access origin="*" />
 
     <feature name="ajpush">
